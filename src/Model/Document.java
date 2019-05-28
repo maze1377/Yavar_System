@@ -1,5 +1,6 @@
 package Model;
 
+import FileManager.WrapperFile;
 import Tools.Code;
 import Tools.Decode;
 import setting.Setting;
@@ -23,6 +24,9 @@ public class Document implements Code<Document> {
     private Field field;
     private Institution institution;
     private Level level;
+    private WrapperFile files;
+    private Doc_State stateDoc;
+
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
         this(publisher, name, freeDom, hashtagList, cost, details, new Date());
@@ -169,6 +173,16 @@ public class Document implements Code<Document> {
 
         public DocumentBuilder removePreViews(PreViews preViews) {
             //todo
+            return this;
+        }
+
+        public DocumentBuilder setFiles(WrapperFile files) {
+            obj.files = files;
+            return this;
+        }
+
+        public DocumentBuilder setStateDoc(Doc_State stateDoc) {
+            obj.stateDoc = stateDoc;
             return this;
         }
 
