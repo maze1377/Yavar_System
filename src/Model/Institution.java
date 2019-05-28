@@ -1,8 +1,10 @@
+package Model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Institution implements Serializable {//user can creat new Institution
+public class Institution implements Serializable {//user can creat new Model.Institution
     private final String institution;//must be final ! list match with this tag!
     private List<Document> documentsOfInstitution;//may be user hashtree for make it unic!
 

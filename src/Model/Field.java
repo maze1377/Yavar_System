@@ -1,8 +1,10 @@
+package Model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Field implements Serializable {//user can creat new Hashtag
+public class Field implements Serializable {
     private final String field;//must be final ! list match with this tag!
     private List<Document> documentsOfField;//may be user hashtree for make it unic!
 

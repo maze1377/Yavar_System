@@ -1,3 +1,9 @@
+package Model;
+
+import Tools.Code;
+import Tools.Decode;
+import setting.Setting;
+
 import java.util.List;
 
 public class Document implements Code<Document> {
@@ -102,6 +108,10 @@ public class Document implements Code<Document> {
         return level;
     }
 
+    public View preview() {
+        return null;
+    }
+
     public static class DocumentBuilder implements Decode<DocumentBuilder> {
         private Document obj;
 
@@ -200,10 +210,6 @@ public class Document implements Code<Document> {
         public DocumentBuilder decodeObject(String code) {
             return null;
         }
-    }
-
-    public View preview(){
-        return null;
     }
 
 }

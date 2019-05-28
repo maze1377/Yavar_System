@@ -1,3 +1,5 @@
+package DB;
+
 public class Db_Handler {
     private static Db_Handler ourInstance = new Db_Handler();
 
