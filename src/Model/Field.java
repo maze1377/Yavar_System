@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Field implements Serializable {
     private final String field;//must be final ! list match with this tag!
-    private List<Document> documentsOfField;//may be user hashtree for make it unic!
+    private List<Document> documentsOfField;//may be User hashtree for make it unic!
 
     public Field(String field, List<Document> documentsOfField) {//constructor for create model from Db
         this.field = field;

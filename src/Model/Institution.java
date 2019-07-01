@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Institution implements Serializable {//user can creat new Model.Institution
+public class Institution implements Serializable {//User can creat new Model.Institution
     private final String institution;//must be final ! list match with this tag!
-    private List<Document> documentsOfInstitution;//may be user hashtree for make it unic!
+    private List<Document> documentsOfInstitution;//may be User hashtree for make it unic!
 
     public Institution(String institution, List<Document> documentsOfInstitution) {//constructor for create model from Db
         this.institution = institution;
