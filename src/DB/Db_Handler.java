@@ -1,5 +1,6 @@
 package DB;
 
+import Model.Date;
 import Model.Document;
 import Model.Message;
 import Model.User;
@@ -10,8 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Db_Handler {
-    private static final int DATABASE_VERSION = 1;
-    private static Map<String, Db_Handler> databaseMap = new HashMap<>();
+    private static Map<String, Db_Handler> databaseMap = new HashMap<>();//Db_Connection_Poll
     private Database database = null;
 
     private Db_Handler(String databaseName) throws Db_Cant_Create_Ex {
@@ -81,7 +81,11 @@ public class Db_Handler {
 
     }
 
-    public void addMassageToUser(User user, Document document) throws Db_Write_Ex {
+    public void addMassageToUser(User user, Message message) throws Db_Write_Ex {
+
+    }
+
+    public void blockUserForTime(User user, Date date) throws Db_Write_Ex {
 
     }
 
@@ -98,6 +102,7 @@ public class Db_Handler {
     public Cursor search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {
         return null;
     }
+    //
 
 
 }
