@@ -7,6 +7,10 @@ public class Setting {
             return null;
     }
 
+    public static Integer genarateIdMessage() {
+        return null;
+    }
+
     public static Admin SYSTEM = new Admin();//todo
     public static stateLan curentState = stateLan.Fa;
 

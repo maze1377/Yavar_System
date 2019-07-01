@@ -10,6 +10,7 @@ public enum Default_Val {
 
     ReportUserSuccessful("گزارش شما با موفقیت ارسال شد.", "Your report has been sent successfully"),
     ReportUserNotSuccessful("گزارش شما ارسال نشد.", "Your report has not been sent successfully"),
+    NotValidateMessage("پیام دارای کلمات فیلتر شده میباشد.", "Your Message have bad Words"),
 
     ReportDocSuccessful("گزارش شما با موفقیت ارسال شد.",  "Your report has been sent successfully"),
     ReportDocNotSuccessful("گزارش شما با موفقیت ارسال نشد.",  "Your report has not been sent successfully"),

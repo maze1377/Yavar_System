@@ -7,6 +7,8 @@ import setting.Setting;
 
 import java.util.List;
 
+import static setting.Setting.genarateIdMessage;
+
 public class SendMassageManager {
     List<String> blackList;
 
@@ -16,8 +18,18 @@ public class SendMassageManager {
     }
 
     //
-    public void sendMassageFromAdmin(String msg, Admin admin, List<User> recieverId, MessageType type) {
-
+    public void sendMassageFromAdmin(String msg, Admin admin, List<User> recievers, MessageType type) {
+        if (ValidateMessage(msg)) {
+            for (User user : recievers) {
+                Message message = new Message(msg, genarateIdMessage(), admin, user);
+                Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Message).saveMessage(message);
+            }
+        } else {
+            ShowDialog(Default_Val.NotValidateMessage.toString());
+            String newmsg;//input
+            sendMassageFromAdmin(newmsg, admin, recievers, type);
+            return;
+        }
     }
 
     //
@@ -34,7 +46,6 @@ public class SendMassageManager {
         MessageType messageType;//input!
         MessageAccessLevel accessLevel;//input!
         String massage;//input!
-        String filters;//input!
 
         switch (accessLevel) {
             case All:
@@ -42,7 +53,7 @@ public class SendMassageManager {
                 sendMassageFromAdmin(massage, admin, targets, messageType);
                 break;
             case SpecialUsers:
-                List<User> targets = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.User).findUser(filters);
+                List<User> targets = FilterUser();
                 if (targets.size() < 1) {
                     ShowDialog(Default_Val.NotUserFind.toString());
                     return;
