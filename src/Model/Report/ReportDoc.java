@@ -5,9 +5,8 @@ import Model.User;
 public class ReportDoc extends ReportMessage {
     private final int reportedDocID;
 
-
-    public ReportDoc(String msg, int idMessage, User sender, User reciever, int reportedDocID) {
-        super(msg, idMessage, sender, reciever, ReportType.DocReport);
+    public ReportDoc(String msg, int idMessage, int sender, int reportedDocID) {
+        super(ReportType.DocReport, msg, idMessage, sender);
         this.reportedDocID = reportedDocID;
     }
 

@@ -4,6 +4,18 @@ import setting.Setting;
 
 public enum Default_Val {
     SuccesAddUser("کاربر با موفقت اضافه شد.", "User add successful"),
+
+    CommentSuccessful("نظر شما با موفقیت ارسال شد.", "Comment has been sent successfully"),
+    CommentNotSuccessful("نظر شما ارسال نشد.", "Comment has not been sent successfully"),
+
+    ReportUserSuccessful("گزارش شما با موفقیت ارسال شد.", "Your report has been sent successfully"),
+    ReportUserNotSuccessful("گزارش شما ارسال نشد.", "Your report has not been sent successfully"),
+
+    ReportDocSuccessful("گزارش شما با موفقیت ارسال شد.",  "Your report has been sent successfully"),
+    ReportDocNotSuccessful("گزارش شما با موفقیت ارسال نشد.",  "Your report has not been sent successfully"),
+
+    SuggestionSuccessful("ممنون از ارسال نظرات.", "Thank you for your suggestion"),
+    SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
     ;
     private String per;
     private String En;

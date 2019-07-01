@@ -26,6 +26,7 @@ public class Setting {
         Hashtag("Hashtags"),
         Institution("Institutions"),
         Message("Message"),
+        Report("Report"),
 
         ;
         private String Table_name;
