@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
     //private final Integer idUser;
     private List<Order> orderList;
-    private List<Document> myDocoument;
+    private List<Document> myDocuments;
     private String userName;
     private String password;
     private String firstName;
@@ -20,8 +20,42 @@ public class User {
     private String creditCardNumber;
     private long credit;
 
+    public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, long credit) {
+        this.orderList = orderList;
+        this.myDocuments = myDocuments;
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        LastName = lastName;
+        this.nationalCode = nationalCode;
+        this.tel = tel;
+        this.email = email;
+        this.field = field;
+        this.university = university;
+        this.certificate = certificate;
+        this.enterDate = enterDate;
+        this.creditCardNumber = creditCardNumber;
+        this.credit = credit;
+    }
+
     public void addCredit(long amount){
         credit += amount;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public List<Document> getMyDocuments() {
+        return myDocuments;
+    }
+
+    public void setMyDocuments(List<Document> myDocuments) {
+        this.myDocuments = myDocuments;
     }
 
     public String getUserName() {

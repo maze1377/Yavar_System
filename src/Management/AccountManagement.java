@@ -1,6 +1,8 @@
 package Management;
 
+import DB.Db_Handler;
 import Model.User;
+import setting.Setting;
 
 public class AccountManagement {
 
@@ -8,6 +10,7 @@ public class AccountManagement {
         boolean statusPay = bankPort(amount);
         if(statusPay == true){
             user.addCredit(amount);
+            Db_Handler.getDatabaseHandler(Setting.Db_Table_name.User).updateUser(user);
         }
         else{
             showError("payments error");

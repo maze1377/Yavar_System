@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Db_Handler {
-    private static Map<String, Db_Handler> databaseMap = new HashMap<>();//Db_Connection_Poll
+    private static Map<Setting.Db_Table_name, Db_Handler> databaseMap = new HashMap<>();//Db_Connection_Poll
     private Database database = null;
 
-    private Db_Handler(String databaseName) throws Db_Cant_Create_Ex {
+    private Db_Handler(Setting.Db_Table_name databaseName) throws Db_Cant_Create_Ex {
         String base;
     }
 
-    public static synchronized Db_Handler getDatabaseHandler(String databaseName) {
+    public static synchronized Db_Handler getDatabaseHandler(Setting.Db_Table_name databaseName) {
         Db_Handler handler = databaseMap.get(databaseName);
         if (handler == null) {
             handler = new Db_Handler(databaseName);
