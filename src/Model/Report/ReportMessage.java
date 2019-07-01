@@ -1,37 +1,25 @@
 package Model.Report;
 
+import Model.Message;
+import Model.User;
+
 import java.util.Date;
 
-public abstract class ReportMessage {
-    private final long sendDate;
-    private final String msg;
-    private final int ReporterID;
+public abstract class ReportMessage extends Message {
+
     private final ReportType type;
 
-    public ReportMessage(String msg, long sendTime, int ReporterID, ReportType type) {
-        this.msg = msg;
-        this.sendDate = sendTime;
-        this.ReporterID = ReporterID;
+    public ReportMessage(Date sendDate, String msg, int idMessage, User sender, User reciever, ReportType type) {
+        super(sendDate, msg, idMessage, sender, reciever);
         this.type = type;
     }
 
-    public ReportMessage(String msg, int ReporterID, ReportType type) {
-        this.msg = msg;
-        this.ReporterID = ReporterID;
+    public ReportMessage(String msg, int idMessage, User sender, User reciever, ReportType type) {
+        super(msg, idMessage, sender, reciever);
         this.type = type;
-        this.sendDate = new Date().getTime();
     }
 
-    public long getSendDate() {
-        return sendDate;
+    public ReportType getType() {
+        return type;
     }
-
-    public int getReporterID() {
-        return this.ReporterID;
-    }
-
-    public String getMessage() {
-        return msg;
-    }
-
 }
