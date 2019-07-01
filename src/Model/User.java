@@ -20,6 +20,10 @@ public class User {
     private String creditCardNumber;
     private long credit;
 
+    public void addCredit(long amount){
+        credit += amount;
+    }
+
     public String getUserName() {
         return userName;
     }
