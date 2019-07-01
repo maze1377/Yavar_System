@@ -2,8 +2,10 @@ package DB;
 
 import Model.*;
 import Model.Report.ReportMessage;
+import Model.Report.Support;
 import setting.Setting;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,6 +136,9 @@ public class Db_Handler {
 
     //report
     public boolean saveReportMessage(ReportMessage reportMessage) throws Db_Write_Ex {
+        return true;
+    }
+    public boolean saveReportMessage(ArrayList<Support> reportMessage) throws Db_Write_Ex {
         return true;
     }
 
