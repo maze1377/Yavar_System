@@ -1,12 +1,9 @@
 package DB;
 
-import Model.Date;
-import Model.Document;
-import Model.Message;
-import Model.User;
+import Model.*;
+import Model.Report.ReportMessage;
 import setting.Setting;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,81 +24,123 @@ public class Db_Handler {
         return handler;
     }
 
+    public boolean validDatabase() {
+        return database != null && database.isOpen();
+    }
+
     //doc
-    public void saveDocument(Document document) throws Db_Write_Ex {
-
+    public boolean saveDocument(Document document) throws Db_Write_Ex {
+        return true;
     }
 
-    public void updateDocument(Document document) throws Db_Write_Ex {
-
+    public boolean updateDocument(Document document) throws Db_Write_Ex {
+        return true;
     }
 
-    public void deleteDocument(Document document) {
-
+    public boolean deleteDocument(Document document) {
+        return true;
     }
 
-    public void findDocument(String... arr) throws Db_NotFind_Ex {
-
+    public Document findDocument(String... arr) throws Db_NotFind_Ex {
+        return null;
     }
 
-    public void findDocument(Integer idDoc) throws Db_NotFind_Ex {
+    public Document findDocument(Integer idDoc) throws Db_NotFind_Ex {
+        return null;
+    }
 
+    //admin
+    public boolean saveAdmin(Admin admin) throws Db_Write_Ex {
+        return true;
+    }
+
+    public boolean updateAdmin(Admin admin) throws Db_Write_Ex {
+        return true;
+    }
+
+    public boolean deleteAdmin(Admin admin) {
+        return true;
+    }
+
+    public Admin findAdmin(String... arr) throws Db_NotFind_Ex {
+        return null;
+    }
+
+    public Admin findAdmin(Integer idadmin) throws Db_NotFind_Ex {
+        return null;
     }
 
     //user
-    public void saveUser(User user) throws Db_Write_Ex {
-
+    public boolean saveUser(User user) throws Db_Write_Ex {
+        return true;
     }
 
-    public void updateUser(User user) throws Db_Write_Ex {
-
+    public boolean updateUser(User user) throws Db_Write_Ex {
+        return true;
     }
 
-    public void deleteUser(User user) {
-
+    public boolean deleteUser(User user) {
+        return true;
     }
 
-    public void findUser(String... arr) throws Db_NotFind_Ex {
-
+    public User findUser(String... arr) throws Db_NotFind_Ex {
+        return null;
     }
 
-    public void findUser(Integer idUser) throws Db_NotFind_Ex {
-
+    public User findUser(Integer idUser) throws Db_NotFind_Ex {
+        return null;
     }
 
-    public void updateBalance(User user, double Cost) throws Db_Write_Ex {
-
+    public boolean updateBalance(User user, double Cost) throws Db_Write_Ex {
+        return true;
     }
 
-    public void buyDocument(User user, Document document) throws Db_Write_Ex {
-
+    public boolean buyDocument(User user, Document document) throws Db_Write_Ex {
+        //every check done before call this!
+        if (user.getCredit() > document.getCost()) {
+            boolean sw = false;
+            while (!sw) {
+                sw = updateBalance(user, -document.getCost());
+            }
+            while (!sw) {
+                sw = addDocumentToUser(user, document);
+            }
+            return true;
+        }
+        return true;
     }
 
-    public void addDocumentToUser(User user, Document document) throws Db_Write_Ex {
-
+    public boolean addDocumentToUser(User user, Document document) throws Db_Write_Ex {
+        return true;
     }
 
-    public void addMassageToUser(User user, Message message) throws Db_Write_Ex {
-
+    public boolean addMassageToUser(User user, Message message) throws Db_Write_Ex {
+        return true;
     }
 
-    public void blockUserForTime(User user, Date date) throws Db_Write_Ex {
-
+    public boolean blockUserForTime(User user, Date date) throws Db_Write_Ex {
+        return true;
     }
 
     //Message
-    public void saveMessage(Message message) throws Db_Write_Ex {
-
+    public boolean saveMessage(Message message) throws Db_Write_Ex {
+        return true;
     }
 
-    public void deleteMessage(Message message) {
-
+    public boolean deleteMessage(Message message) {
+        return true;
     }
 
-    //
-    public Cursor search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {
+    //report
+    public boolean saveReportMessage(ReportMessage reportMessage) throws Db_Write_Ex {
+        return true;
+    }
+
+    //search for
+    public Object search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {
         return null;
     }
+
     //
 
 

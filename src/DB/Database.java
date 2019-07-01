@@ -9,7 +9,8 @@ public abstract class Database {
 
     public abstract boolean isOpen();
 
-    public boolean validDatabase() {
-        return this != null && this.isOpen();
-    }
+    public abstract long TestSpeed();
+
+    public abstract Database getInstance();
+
 }

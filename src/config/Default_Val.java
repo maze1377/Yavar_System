@@ -17,7 +17,7 @@ public enum Default_Val {
         return per;
     }
 
-    //set date for user 
+    //set date for user
     public void setPer(String per) {
         this.per = per;
     }
