@@ -5,6 +5,16 @@ public class Setting {
             return null;
     }
 
+    public static stateLan curentState = stateLan.Fa;
+
+    public static void setCurentState(stateLan curentState) {
+        Setting.curentState = curentState;
+    }
+
+    public enum stateLan {
+        En,
+        Fa
+    }
     public enum Db_Table_name {
         User("Users"),
         Document("Documents"),
