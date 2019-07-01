@@ -13,6 +13,7 @@ public enum Default_Val {
 
     ReportDocSuccessful("گزارش شما با موفقیت ارسال شد.",  "Your report has been sent successfully"),
     ReportDocNotSuccessful("گزارش شما با موفقیت ارسال نشد.",  "Your report has not been sent successfully"),
+    NotUserFind("کاربری یافت نشد.", "User not finds!"),
 
     SuggestionSuccessful("ممنون از ارسال نظرات.", "Thank you for your suggestion"),
     SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
