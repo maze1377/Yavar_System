@@ -10,6 +10,8 @@ public class Setting {
     public static Admin SYSTEM = new Admin();//todo
     public static stateLan curentState = stateLan.Fa;
 
+    public static long minCredit = 10000;
+
     public static void setCurentState(stateLan curentState) {
         Setting.curentState = curentState;
     }

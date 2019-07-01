@@ -3,8 +3,8 @@ package config;
 import setting.Setting;
 
 public enum Default_Val {
-    SuccesAddUser("کاربر با موفقت اضافه شد.", "User add successful"),
-    ;
+    SuccesAddUser("کاربر با موفقت اضافه شد.", "User add successful");
+
     private String per;
     private String En;
 

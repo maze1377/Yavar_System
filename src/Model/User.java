@@ -1,5 +1,7 @@
 package Model;
 
+import Management.AccountManagement;
+
 import java.util.List;
 
 public class User {
@@ -38,25 +40,36 @@ public class User {
         this.credit = credit;
     }
 
+    public void requestAddCredit(long amount){
+        AccountManagement.addAccount(this, amount);
+    }
+
     public void addCredit(long amount){
         credit += amount;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
+    public void requestWithdraw(long amount){
+        AccountManagement.withdraw(this, amount);
     }
 
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
+    public void withdraw(long amount){
+        credit -= amount;
     }
 
-    public List<Document> getMyDocuments() {
-        return myDocuments;
+    public void clone(User user){
+
     }
 
-    public void setMyDocuments(List<Document> myDocuments) {
-        this.myDocuments = myDocuments;
+    public boolean hasCreditCard(){ return !creditCardNumber.isEmpty();
     }
+
+    public List<Order> getOrderList() { return orderList; }
+
+    public void setOrderList(List<Order> orderList) { this.orderList = orderList; }
+
+    public List<Document> getMyDocuments() { return myDocuments; }
+
+    public void setMyDocuments(List<Document> myDocuments) { this.myDocuments = myDocuments; }
 
     public String getUserName() {
         return userName;
