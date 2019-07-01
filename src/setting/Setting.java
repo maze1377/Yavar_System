@@ -5,4 +5,24 @@ public class Setting {
             return null;
     }
 
+    public enum Db_Table_name {
+        User("Users"),
+        Document("Documents"),
+        Admin("Admins"),
+        Field("Fields"),
+        Hashtag("Hashtags"),
+        Institution("Institutions"),
+        Message("Message"),
+
+        ;
+        private String Table_name;
+
+        Db_Table_name(String table_name) {
+            Table_name = table_name;
+        }
+
+        public String getTable_name() {
+            return Table_name;
+        }
+    }
 }

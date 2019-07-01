@@ -3,24 +3,40 @@ package DB;
 import Model.Document;
 import Model.Message;
 import Model.User;
+import setting.Setting;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Db_Handler {
-    private static Db_Handler ourInstance = new Db_Handler();
+    private static final int DATABASE_VERSION = 1;
+    private static Map<String, Db_Handler> databaseMap = new HashMap<>();
+    private Database database = null;
 
-    public static Db_Handler getInstance() {
-        return ourInstance;
+    private Db_Handler(String databaseName) throws Db_Cant_Create_Ex {
+        String base;
     }
 
-    private Db_Handler() {}
+    public static synchronized Db_Handler getDatabaseHandler(String databaseName) {
+        Db_Handler handler = databaseMap.get(databaseName);
+        if (handler == null) {
+            handler = new Db_Handler(databaseName);
+            databaseMap.put(databaseName, handler);
+        }
+        return handler;
+    }
 
     //doc
-    public void saveDocument(Document document) throws Db_Write_Ex{
+    public void saveDocument(Document document) throws Db_Write_Ex {
 
     }
-    public void updateDocument(Document document) throws Db_Write_Ex{
+
+    public void updateDocument(Document document) throws Db_Write_Ex {
 
     }
-    public void deleteDocument (Document document){
+
+    public void deleteDocument(Document document) {
 
     }
 
@@ -77,7 +93,11 @@ public class Db_Handler {
     public void deleteMessage(Message message) {
 
     }
+
     //
+    public Cursor search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {
+        return null;
+    }
 
 
 }
