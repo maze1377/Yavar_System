@@ -3,13 +3,14 @@ package Model;
 import java.util.Date;
 
 public abstract class Message {
+
     private final Date sendDate;
     private final String msg;
     private final int idMessage;
-    private final User sender;
+    private final Admin sender;
     private final User reciever;
 
-    public Message(Date sendDate, String msg, int idMessage, User sender, User reciever) {
+    public Message(Date sendDate, String msg, int idMessage, Admin sender, User reciever) {
         this.sendDate = sendDate;
         this.msg = msg;
         this.idMessage = idMessage;
@@ -17,7 +18,7 @@ public abstract class Message {
         this.reciever = reciever;
     }
 
-    public Message(String msg, int idMessage, User sender, User reciever) {
+    public Message(String msg, int idMessage, Admin sender, User reciever) {
         this.sendDate = new Date();
         this.msg = msg;
         this.idMessage = idMessage;
@@ -37,7 +38,7 @@ public abstract class Message {
         return idMessage;
     }
 
-    public User getSender() {
+    public Admin getSender() {
         return sender;
     }
 
