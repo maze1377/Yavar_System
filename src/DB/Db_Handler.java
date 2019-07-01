@@ -5,6 +5,7 @@ import Model.Report.ReportMessage;
 import setting.Setting;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Db_Handler {
@@ -41,7 +42,7 @@ public class Db_Handler {
         return true;
     }
 
-    public Document findDocument(String... arr) throws Db_NotFind_Ex {
+    public List<Document> findDocument(String... arr) throws Db_NotFind_Ex {
         return null;
     }
 
@@ -62,7 +63,7 @@ public class Db_Handler {
         return true;
     }
 
-    public Admin findAdmin(String... arr) throws Db_NotFind_Ex {
+    public List<Admin> findAdmin(String... arr) throws Db_NotFind_Ex {
         return null;
     }
 
@@ -83,7 +84,7 @@ public class Db_Handler {
         return true;
     }
 
-    public User findUser(String... arr) throws Db_NotFind_Ex {
+    public List<User> findUser(String... arr) throws Db_NotFind_Ex {
         return null;
     }
 
@@ -137,7 +138,7 @@ public class Db_Handler {
     }
 
     //search for
-    public Object search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {
+    public List<Object> search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {
         return null;
     }
 

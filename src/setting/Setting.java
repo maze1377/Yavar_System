@@ -1,10 +1,13 @@
 package setting;
 
+import Model.Admin;
+
 public class Setting {
     public static Integer genarateIdDoc(){
             return null;
     }
 
+    public static Admin SYSTEM = new Admin();//todo
     public static stateLan curentState = stateLan.Fa;
 
     public static void setCurentState(stateLan curentState) {
