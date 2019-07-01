@@ -3,7 +3,7 @@ package Model.Report;
 public enum ReportType {
     UserReport,//
     DocReport,//
-    CommentReport,//
+    Comment,//
     Suggestions,
     Support,//
 }

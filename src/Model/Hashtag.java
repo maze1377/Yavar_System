@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hashtag implements Serializable {//user can creat new Model.Hashtag
+public class Hashtag implements Serializable {//User can creat new Model.Hashtag
     private final String tag;//must be final ! list match with this tag!
-    private List<Document> documentsOfTag;//may be user hashtree for make it unic!
+    private List<Document> documentsOfTag;//may be User hashtree for make it unic!
 
     public Hashtag(String tag, List<Document> documentsOfTag) {//constructor for create model from Db
         this.tag = tag;

@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public abstract class Message {
+public class Message {
 
     private final Date sendDate;
     private final String msg;
