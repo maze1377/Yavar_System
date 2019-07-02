@@ -40,7 +40,7 @@ public class User implements Blockable {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
-        LastName = lastName;
+        this.LastName = lastName;
         this.nationalCode = nationalCode;
         this.tel = tel;
         this.email = email;
