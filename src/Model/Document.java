@@ -31,6 +31,14 @@ public class Document implements Code<Document> {
     private ArrayList<Score> scores;
     private ArrayList<Comment> comments;
 
+    public WrapperFile getFiles() {
+        return files;
+    }
+
+    public Doc_State getStateDoc() {
+        return stateDoc;
+    }
+
     public static boolean Validator(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
         return true;
     }

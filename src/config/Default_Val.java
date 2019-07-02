@@ -21,6 +21,7 @@ public enum Default_Val {
     SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
     DocUpdate("سند شما اپدیت شد.", "Your Document Update"),
     EditedDoc("سند شما اپدیت شد.", "Your Document Update"),
+    fullDelet("سند به طور کامل حذف  شد.", " remove document"),
 
 
     morereports("تعداد گزارشات بیش از حد.", "you cant remove this device"),

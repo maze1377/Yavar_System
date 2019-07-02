@@ -2,10 +2,7 @@ package Management;
 
 import DB.Db_Handler;
 import FileManager.WrapperFile;
-import Model.Admin;
-import Model.Document;
-import Model.MessageType;
-import Model.User;
+import Model.*;
 import config.Default_Val;
 import service.SendMassageManager;
 import setting.Setting;
@@ -13,8 +10,10 @@ import setting.Setting;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Management.BalanceManager.UpdateUserBalance;
 import static config.Default_Val.CantEditDoc;
 import static service.SendMassageManager.ShowDialog;
+import static service.SendMassageManager.sendMassageFromAdmin;
 import static shared_preferences.INPUT.*;
 
 public class DocumentManager {
@@ -84,6 +83,31 @@ public class DocumentManager {
             }
         }
         return false;
+    }
+
+    public static void DeleteDocumentAdmin(Admin admin, Document document) {
+        if (document == null)
+            return;
+        List<User> targets = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.User).findUser("*");
+        for (User user : targets) {
+            for (Order order : user.getOrderList()) {
+                if (order.isSuccessFull()) {
+                    if (order.getDocument().equals(document)) {
+                        double cost = callDamageOfRemove(user, document);
+                        UpdateUserBalance(user, cost);
+                        List<User> users = new ArrayList<>();
+                        users.add(user);
+                        sendMassageFromAdmin(Default_Val.fullDelet.toString(), admin, users, MessageType.Warning);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }
+
+    private static Double callDamageOfRemove(User user, Document document) {
+        return null;
     }
 
 }
