@@ -1,6 +1,7 @@
 package Model;
 
 import Management.AccountManagement;
+import Model.Report.SupportMsg;
 import service.PublicFunctions;
 import service.Search;
 
@@ -195,4 +196,8 @@ public class User {
     public void setCredit(long credit) {
         this.credit = credit;
     }
+
+    public SupportMsg getHeadMsg() {return headMsg;}
+
+    public void setHeadMsg(SupportMsg headMsg) { this.headMsg = headMsg; }
 }

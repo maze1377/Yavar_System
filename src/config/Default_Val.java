@@ -18,6 +18,11 @@ public enum Default_Val {
 
     SuggestionSuccessful("ممنون از ارسال نظرات.", "Thank you for your suggestion"),
     SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
+
+
+
+    cantremovedevice("شما قابلیت حذف این دستگاه را ندارید.", "you cant remove this device"),
+    cantaddevice("شما قابلیت افزودن این دستگاه را ندارید. تعداد دستگاه ها به حداکثر تعداد رسیده", "you cant add this device. maximum number of devices"),
     ;
     private String per;
     private String En;

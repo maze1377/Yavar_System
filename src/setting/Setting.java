@@ -1,6 +1,7 @@
 package setting;
 
 import Model.Admin;
+import Model.Date;
 
 public class Setting {
     public static Integer genarateIdDoc(){
@@ -15,9 +16,15 @@ public class Setting {
     public static stateLan curentState = stateLan.Fa;
 
     public static long minCredit = 10000;
-
+    public static long minDateOfLogin = 5;
+    public static long maxDevices = 4;
     public static void setCurentState(stateLan curentState) {
         Setting.curentState = curentState;
+    }
+
+    public static Date getToday (){
+        Date date = new Date();
+        return date;
     }
 
     public enum stateLan {
@@ -33,6 +40,11 @@ public class Setting {
         Institution("Institutions"),
         Message("Message"),
         Report("Report"),
+        Comment("Comment"),
+        Suggestion("Suggestion"),
+        Support("Support"),
+        UserReport("UserReport"),
+        DocReport("DocReport"),
 
         ;
         private String Table_name;
