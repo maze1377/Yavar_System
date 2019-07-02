@@ -40,6 +40,11 @@ public class Setting {
         Institution("Institutions"),
         Message("Message"),
         Report("Report"),
+        Comment("Comment"),
+        Suggestion("Suggestion"),
+        Support("Support"),
+        UserReport("UserReport"),
+        DocReport("DocReport"),
 
         ;
         private String Table_name;

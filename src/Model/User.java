@@ -1,11 +1,8 @@
 package Model;
 
 import Management.AccountManagement;
-import service.PublicFunctions;
-import service.Search;
-import setting.Setting;
+import Model.Report.SupportMsg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -22,33 +19,12 @@ public class User {
     private String field;
     private String university;
     private String certificate;
-    private ArrayList<Device> userDevices;
     private Date enterDate;
     private String creditCardNumber;
+    private SupportMsg headMsg;
     private long credit;
 
-    public ArrayList<Device> getUserDevices() {
-        return userDevices;
-    }
-    public void addUserDevices(Device device) {
-        userDevices.add(device);
-    }
-    public boolean removeUserDevices(Device device) {
-        for(int w = 0 ; w< userDevices.size(); w++){
-            if(device.getMac_ip() ==userDevices.get(w).getMac_ip()){
-              userDevices.remove(w);
-            return true;
-            }
-        }
-        return false;
-
-    }
-
-    public void setUserDevices(ArrayList<Device> userDevices) {
-        this.userDevices = userDevices;
-    }
-
-    public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, long credit) {
+    public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, SupportMsg headMsg, long credit) {
         this.orderList = orderList;
         this.myDocuments = myDocuments;
         this.userName = userName;
@@ -64,22 +40,8 @@ public class User {
         this.enterDate = enterDate;
         this.creditCardNumber = creditCardNumber;
         this.credit = credit;
-        userDevices = new ArrayList<>();
     }
 
-    public List<User> requestSearchAndFilterUser(String input, String... atr){
-        List<User> users = Search.searchUser(input);
-        List<User> users1 = Search.filterUser(atr);
-        List<User> resultUser = PublicFunctions.intersection(users, users1);
-        return resultUser;
-    }
-
-    public List<Document> requestSearchAndFilterDocument(String input, String... atr){
-        List<Document> Documents = Search.searchDocument(input);
-        List<Document> Documents1 = Search.filterDocument(atr);
-        List<Document> resultDocument = PublicFunctions.intersection(Documents, Documents1);
-        return resultDocument;
-    }
 
     public void requestAddCredit(long amount){
         AccountManagement.addAccount(this, amount);
@@ -103,8 +65,6 @@ public class User {
 
     public boolean hasCreditCard(){ return !creditCardNumber.isEmpty();
     }
-
-
 
     public List<Order> getOrderList() { return orderList; }
 
@@ -217,4 +177,8 @@ public class User {
     public void setCredit(long credit) {
         this.credit = credit;
     }
+
+    public SupportMsg getHeadMsg() {return headMsg;}
+
+    public void setHeadMsg(SupportMsg headMsg) { this.headMsg = headMsg; }
 }
