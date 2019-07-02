@@ -6,7 +6,7 @@ import setting.Setting;
 
 import java.util.ArrayList;
 
-public class DeviceCommentManagment {
+public class DeviceManagment {
 
     public  boolean remove_device(Device removement_device , Device user_device , User user){
         if(Setting.getToday().getTime() - user_device.getDevice_login().getTime() > Setting.minDateOfLogin){
@@ -38,43 +38,6 @@ public class DeviceCommentManagment {
         }else{
             showError(Default_Val.cantaddevice.toString());
             return false;
-        }
-
-    }
-
-
-    public void add_comment(Comment comment , Document document){
-        if(true){ //// masdod nabodan
-            if(comment.getBody().equals("")){
-                showError(Default_Val.freecomment.toString());
-            }else{
-                if(checkbody(comment.getBody())){
-                    document.addComment(comment);
-                    showError(Default_Val.commentaccept.toString());
-                }else{
-                    showError(Default_Val.NotValidateMessage.toString());
-                    //todo farakhani masdod kardan
-                }
-            }
-        }
-    }
-
-    public boolean removeComment(Comment comment , Document document){
-       return document.removeComment(comment);
-    }
-
-    public boolean reportComment(ReportComment reportComment){
-
-        if(reportComment.getDes().equals("")){
-            return false;
-        }
-        if(true){
-            ///////
-          return true;
-        }else{
-           showError(Default_Val.morereports.toString());
-           return false;
-           ///
         }
 
     }
