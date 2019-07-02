@@ -69,7 +69,7 @@ public class SendMassageManager {
     }
 
     //
-    public void sendMassageFromAdmin(String msg, Admin admin, List<User> recievers, MessageType type) {
+    public static void sendMassageFromAdmin(String msg, Admin admin, List<User> recievers, MessageType type) {
         if (ValidateMessage(msg)) {
             for (User user : recievers) {
                 Message message = new Message(msg, genarateIdMessage(), admin, user);

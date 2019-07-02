@@ -2,19 +2,19 @@ package Model.Report;
 
 import Model.User;
 
-public class SupportMsg extends ReportMessage {
-    private ReportMessage nextMsg;
+public class SupportMsg extends ReportSingleMsg {
+    private ReportSingleMsg nextMsg;
 
-    public SupportMsg(String msg, int idMessage, User sender, ReportMessage nextMsg) {
+    public SupportMsg(String msg, int idMessage, User sender, ReportSingleMsg nextMsg) {
         super(ReportType.Support, msg, idMessage, sender);
         this.nextMsg = nextMsg;
     }
 
-    public ReportMessage getNextMsg() {
+    public ReportSingleMsg getNextMsg() {
         return nextMsg;
     }
 
-    public void setNextMsg(ReportMessage nextMsg) {
+    public void setNextMsg(ReportSingleMsg nextMsg) {
         this.nextMsg = nextMsg;
     }
 }
