@@ -4,12 +4,18 @@ public class Comment {
     String body;
     Date dateOfComment;
     User user;
+    String name ;
 
-    public Comment(String body, Date dateOfComment, User user) {
+    public Comment(String body, Date dateOfComment, User user, String name, boolean show_name) {
         this.body = body;
         this.dateOfComment = dateOfComment;
         this.user = user;
+        this.name = name;
+        this.show_name = show_name;
     }
+
+    boolean show_name;
+
 
     public String getBody() {
         return body;

@@ -20,9 +20,13 @@ public enum Default_Val {
     SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
 
 
-
+    morereports("تعداد گزارشات بیش از حد.", "you cant remove this device"),
+    commentaccept("نظر شما با موفقیت ثبت شد.", "your comment added succusfully"),
+    wrongbody("شما از کلمات غیر مجاز استفاده کرده اید. ", "wrong comment"),
+    freecomment("لطفا نظر خود را وارد کنید.", "add comment"),
     cantremovedevice("شما قابلیت حذف این دستگاه را ندارید.", "you cant remove this device"),
     cantaddevice("شما قابلیت افزودن این دستگاه را ندارید. تعداد دستگاه ها به حداکثر تعداد رسیده", "you cant add this device. maximum number of devices"),
+    deviceexist("دستگاه از قبل موجود میباشد", "device exists"),
     ;
     private String per;
     private String En;

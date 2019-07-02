@@ -28,11 +28,33 @@ public class Document implements Code<Document> {
     private WrapperFile files;
     private Doc_State stateDoc;
     private ArrayList<Score> scores;
-
+    private ArrayList<Comment> comments;
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
         this(publisher, name, freeDom, hashtagList, cost, details, new Date());
     }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+
+    }
+
+    public boolean removeComment(Comment comment) {
+      for(int w = 0 ; w<comments.size() ; w++){
+          if(comment.user.equals(comments.get(w).user)){
+              comments.remove(w);
+              return true;
+          }
+      }
+      return false;
+
+    }
+
+
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details, Date publishDate) {
         this.publisher = publisher;
@@ -44,6 +66,7 @@ public class Document implements Code<Document> {
         this.publishDate = publishDate;
         this.idDocument = Setting.genarateIdDoc();
         scores = new ArrayList();
+        comments = new ArrayList<>();
     }
 
     @Override
