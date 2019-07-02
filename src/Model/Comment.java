@@ -1,10 +1,14 @@
 package Model;
 
-public class Comment {
+import Model.Block.BlockType;
+import Model.Block.BlockTypeException;
+import Model.Block.Blockable;
+
+public class Comment implements Blockable {
     String body;
     Date dateOfComment;
     User user;
-    String name ;
+    String name;
 
     public Comment(String body, Date dateOfComment, User user, String name, boolean show_name) {
         this.body = body;
@@ -39,5 +43,23 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public int negScoreExceeds(BlockType type) throws BlockTypeException {
+        if (type == BlockType.Comment) {
+            return 0;
+        } else {
+            throw new BlockTypeException(type);
+        }
+    }
+
+    @Override
+    public boolean block(BlockType type) throws BlockTypeException {
+        if (type == BlockType.Comment) {
+            return this.user.block(type);
+        } else {
+            throw new BlockTypeException(type);
+        }
     }
 }

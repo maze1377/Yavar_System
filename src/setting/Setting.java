@@ -31,6 +31,25 @@ public class Setting {
         En,
         Fa
     }
+
+    public enum BlockMinimumDefault{
+        ConnectionLimit(10),
+        Document(10),
+        User(10),
+        Comment(10),
+
+        ;
+
+        private int val;
+        BlockMinimumDefault(int val){
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
+
     public enum Db_Table_name {
         User("Users"),
         Document("Documents"),
