@@ -4,13 +4,13 @@
 //
 //// For each User that has never used Support Section it will be created once and only
 //public class Support {
-//    private final ArrayList<ReportMessage> msgs;
+//    private final ArrayList<ReportSingleMsg> msgs;
 //
 //    public Support() {
-//        this.msgs = new ArrayList<ReportMessage>();
+//        this.msgs = new ArrayList<ReportSingleMsg>();
 //    }
 //
-//    public ArrayList<ReportMessage> getMsgs() {
+//    public ArrayList<ReportSingleMsg> getMsgs() {
 //        return msgs;
 //    }
 //

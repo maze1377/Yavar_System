@@ -62,4 +62,7 @@ public class Comment implements Blockable {
             throw new BlockTypeException(type);
         }
     }
+
+    @Override
+    public void checkDeadline(){}
 }
