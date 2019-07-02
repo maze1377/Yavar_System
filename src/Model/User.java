@@ -3,7 +3,6 @@ package Model;
 import Management.AccountManagement;
 import service.PublicFunctions;
 import service.Search;
-import setting.Setting;
 
 import java.util.List;
 
@@ -80,7 +79,10 @@ public class User {
     public boolean hasCreditCard(){ return !creditCardNumber.isEmpty();
     }
 
-
+    public boolean equals(User user){
+        boolean isEquals = false;
+        return isEquals;
+    }
 
     public List<Order> getOrderList() { return orderList; }
 
