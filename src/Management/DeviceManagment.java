@@ -42,6 +42,10 @@ public class DeviceManagment {
 
     }
 
+    public Device createDevice(Date device_login, String mac_ip) {
+        return new Device(device_login,mac_ip);
+    }
+
 
 
 

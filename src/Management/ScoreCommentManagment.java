@@ -5,6 +5,16 @@ import config.Default_Val;
 
 public class ScoreCommentManagment {
 
+
+    public Score createscore(int scoreNum, User user, Date dateOfScore) {
+        return new Score(scoreNum,user,dateOfScore);
+    }
+
+    public Comment createcomment(String body, Date dateOfComment, User user, String name, boolean show_name) {
+        return new Comment(body,dateOfComment,user,name,show_name);
+    }
+
+
     public  void addScore (Document document , Score score, User user){
         for(Score user_score : document.getScores()){
             if(score.getUser().equals(user_score.getUser())){

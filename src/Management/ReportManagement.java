@@ -1,6 +1,7 @@
 package Management;
 
 import DB.Db_Handler;
+import Model.Document;
 import Model.MessageType;
 import Model.Report.*;
 import Model.User;
@@ -8,7 +9,6 @@ import config.Default_Val;
 import service.SendMassageManager;
 import setting.Setting;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,10 +17,10 @@ public class ReportManagement {
     private ReportManagement() {
     }
 
-    public static void createComment(String commentMsg, int idMessage, User sender, int forumID, int documentID) {
+    public static void createComment(String commentMsg, int idMessage, User sender, int forumID, Document doc) {
         SendMassageManager messenger = new SendMassageManager();
         try {
-            ReportComment comment = new ReportComment(commentMsg, idMessage, sender, forumID, documentID);
+            ReportComment comment = new ReportComment(commentMsg, idMessage, sender, forumID, doc);
             Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).saveReportMessage(comment);
             if (Setting.curentState == Setting.stateLan.Fa)
                 messenger.sendMassageFromSystem(Default_Val.CommentSuccessful.getPer(), Arrays.asList(new User[]{sender}), MessageType.System);
@@ -85,7 +85,7 @@ public class ReportManagement {
         }
     }
 
-    public static List<ReportMessage> getSupportMsgs(User user) {
+    public static List<ReportSingleMsg> getSupportMsgs(User user) {
         while (user.getHeadMsg() != null) {
             Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).
                     search("", Setting.Db_Table_name.Report, true);
@@ -93,7 +93,7 @@ public class ReportManagement {
         return null;
     }
 
-    public static void addSupport(SupportMsg msgs, User user) {
+    public static void createSupportMsg(SupportMsg msgs, User user) {
         try {
             Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).saveReportMessage(msgs);
         } catch (Exception e) {
@@ -102,16 +102,26 @@ public class ReportManagement {
         }
     }
 
-    public static List<ReportMessage> getReports(User user, ReportType type){
+    public static List<ReportSingleMsg> getReports(User user, ReportType type) {
         List temp = null;
-        switch (type){
-            case Comment: temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.Comment,true);break;
-            case Suggestions: temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.Suggestion,true);break;
-            case Support: temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.Support,true);break;
-            case DocReport: temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.DocReport,true);break;
-            case UserReport: temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.UserReport,true);break;
+        switch (type) {
+            case Comment:
+                temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.Comment, true);
+                break;
+            case Suggestions:
+                temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.Suggestion, true);
+                break;
+            case Support:
+                temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.Support, true);
+                break;
+            case DocReport:
+                temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.DocReport, true);
+                break;
+            case UserReport:
+                temp = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Report).search("", Setting.Db_Table_name.UserReport, true);
+                break;
         }
 
-        return (List<ReportMessage>)temp;
+        return (List<ReportSingleMsg>)temp;
     }
 }

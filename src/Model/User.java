@@ -1,10 +1,12 @@
 package Model;
 
 import Management.AccountManagement;
+import Model.Block.BlockModel;
 import Model.Block.BlockType;
 import Model.Block.BlockTypeException;
 import Model.Block.Blockable;
 import Model.Report.SupportMsg;
+import service.SendMassageManager;
 import setting.Setting;
 
 import java.util.ArrayList;
@@ -25,14 +27,35 @@ public class User implements Blockable {
     private String university;
     private String certificate;
     private ArrayList<Device> userDevices;
+    private ArrayList<SpecialDocument> specialFeatures;
     private Date enterDate;
     private String creditCardNumber;
     private SupportMsg headMsg;
     private long credit;
-    private int commentBlock;
-    private int userBlock;
-    private int docBlock;
-    private int connectionLimitBlock;
+    private BlockModel commentBlock;
+    private BlockModel userBlock;
+    private BlockModel docBlock;
+    private BlockModel connectionLimitBlock;
+
+    public ArrayList<SpecialDocument> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void addSpecialFeature(SpecialDocument specialDocument){
+        specialFeatures.add(specialDocument);
+    }
+
+    public boolean removeSpecialFeature(SpecialDocument specialDocument) {
+        for(int w=0 ; w<specialFeatures.size();w++){
+            if(specialFeatures.get(w).getDocument().equals(specialDocument.getDocument())){
+                specialFeatures.remove(w);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 
     public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, SupportMsg headMsg, long credit) {
         this.orderList = orderList;
@@ -230,35 +253,35 @@ public class User implements Blockable {
         this.headMsg = headMsg;
     }
 
-    public int getCommentBlock() {
+    public BlockModel getCommentBlock() {
         return commentBlock;
     }
 
-    public void setCommentBlock(int commentBlock) {
+    public void setCommentBlock(BlockModel commentBlock) {
         this.commentBlock = commentBlock;
     }
 
-    public int getUserBlock() {
+    public BlockModel getUserBlock() {
         return userBlock;
     }
 
-    public void setUserBlock(int userBlock) {
+    public void setUserBlock(BlockModel userBlock) {
         this.userBlock = userBlock;
     }
 
-    public int getDocBlock() {
+    public BlockModel getDocBlock() {
         return docBlock;
     }
 
-    public void setDocBlock(int docBlock) {
+    public void setDocBlock(BlockModel docBlock) {
         this.docBlock = docBlock;
     }
 
-    public int getConnectionLimitBlock() {
+    public BlockModel getConnectionLimitBlock() {
         return connectionLimitBlock;
     }
 
-    public void setConnectionLimitBlock(int connectionLimitBlock) {
+    public void setConnectionLimitBlock(BlockModel connectionLimitBlock) {
         this.connectionLimitBlock = connectionLimitBlock;
     }
 
@@ -266,17 +289,18 @@ public class User implements Blockable {
     public int negScoreExceeds(BlockType type) throws BlockTypeException {
         switch (type) {
             case Comment:
-                if (this.commentBlock >= Setting.BlockMinimumDefault.Comment.getVal()) return -1;
-                else return this.commentBlock;
+                if (this.commentBlock.getNegativePoint() >= Setting.BlockMinimumDefault.Comment.getVal()) return -1;
+                else return this.commentBlock.getNegativePoint();
             case ConnectionLimit:
-                if (this.connectionLimitBlock >= Setting.BlockMinimumDefault.ConnectionLimit.getVal()) return -1;
-                else return this.connectionLimitBlock;
+                if (this.connectionLimitBlock.getNegativePoint() >= Setting.BlockMinimumDefault.ConnectionLimit.getVal())
+                    return -1;
+                else return this.connectionLimitBlock.getNegativePoint();
             case Document:
-                if (this.docBlock >= Setting.BlockMinimumDefault.Document.getVal()) return -1;
-                else return this.docBlock;
+                if (this.docBlock.getNegativePoint() >= Setting.BlockMinimumDefault.Document.getVal()) return -1;
+                else return this.docBlock.getNegativePoint();
             case User:
-                if (this.userBlock >= Setting.BlockMinimumDefault.User.getVal()) return -1;
-                else return this.userBlock;
+                if (this.userBlock.getNegativePoint() >= Setting.BlockMinimumDefault.User.getVal()) return -1;
+                else return this.userBlock.getNegativePoint();
             default:
                 throw new BlockTypeException(type);
         }
@@ -285,18 +309,30 @@ public class User implements Blockable {
     @Override
     public boolean block(BlockType type) throws BlockTypeException {
         switch (type) {
-            case User: this.userBlock++;
+            case User:
+                this.userBlock.increment();
                 break;
-            case Comment: this.commentBlock++;
+            case Comment:
+                this.commentBlock.increment();
                 break;
-            case Document: this.docBlock++;
+            case Document:
+                this.docBlock.increment();
                 break;
-            case ConnectionLimit: this.connectionLimitBlock++;
+            case ConnectionLimit:
+                this.connectionLimitBlock.increment();
                 break;
             default:
                 throw new BlockTypeException(type);
         }
-        if (this.negScoreExceeds(type) == -1) return false;
-        return true;
+        if (this.negScoreExceeds(type) == -1) {
+            return true;
+        }
+        return false;
     }
+
+    @Override
+    public void checkDeadline() {
+    }
+
+
 }
