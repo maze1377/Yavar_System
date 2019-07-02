@@ -1,8 +1,13 @@
 package Management;
 
 import DB.Db_Handler;
+import Model.Date;
+import Model.Document;
+import Model.Order;
 import Model.User;
 import setting.Setting;
+
+import java.util.List;
 
 public class AccountManagement {
 
@@ -15,7 +20,22 @@ public class AccountManagement {
             }
         }
         else{
-
+            List<Order> orderList = null;
+            List<Document> myDocuments = null;
+            String userName = null;
+            String password = null;
+            String firstName = null;
+            String lastName = null;
+            String nationalCode = null;
+            String tel = null;
+            String email = null;
+            String field = null;
+            String university = null;
+            String certificate = null;
+            Date enterDate = null;
+            String creditCardNumber = null;
+            long credit = 0;
+            ProfileManagement.editProfile(user, new User(orderList, myDocuments, userName, password, firstName, lastName, nationalCode, tel, email, field, university, certificate, enterDate, creditCardNumber, credit));
         }
         return false;
     }

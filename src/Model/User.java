@@ -1,6 +1,9 @@
 package Model;
 
 import Management.AccountManagement;
+import service.PublicFunctions;
+import service.Search;
+import setting.Setting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +67,20 @@ public class User {
         userDevices = new ArrayList<>();
     }
 
+    public List<User> requestSearchAndFilterUser(String input, String... atr){
+        List<User> users = Search.searchUser(input);
+        List<User> users1 = Search.filterUser(atr);
+        List<User> resultUser = PublicFunctions.intersection(users, users1);
+        return resultUser;
+    }
+
+    public List<Document> requestSearchAndFilterDocument(String input, String... atr){
+        List<Document> Documents = Search.searchDocument(input);
+        List<Document> Documents1 = Search.filterDocument(atr);
+        List<Document> resultDocument = PublicFunctions.intersection(Documents, Documents1);
+        return resultDocument;
+    }
+
     public void requestAddCredit(long amount){
         AccountManagement.addAccount(this, amount);
     }
@@ -86,6 +103,8 @@ public class User {
 
     public boolean hasCreditCard(){ return !creditCardNumber.isEmpty();
     }
+
+
 
     public List<Order> getOrderList() { return orderList; }
 

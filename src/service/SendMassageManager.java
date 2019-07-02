@@ -33,7 +33,37 @@ public class SendMassageManager {
     }
 
     //
-    public void messegeToDocUsers(String msg, Document document) {
+    public void messegeToDocUsers(String msg, Document document, MessageType type) {
+        if (ValidateMessage(msg)) {
+
+
+            switch (type) {
+                case Admin:
+                    Message message = new Message(msg, genarateIdMessage(), Setting.SYSTEM, document.getPublisher());
+                    Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Message).saveMessage(message);
+                    break;
+                case Notification://change by user
+                    msg.contains(" from:" + document.getPublisher().getUserName());
+                    List<User> targets = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.User).findUser("*");
+                    for (User user : targets) {
+                        for (Order order : user.getOrderList()) {
+                            if (order.isSuccessFull()) {
+                                if (order.getDocument().equals(document)) {
+                                    Message message2 = new Message(msg, genarateIdMessage(), Setting.SYSTEM, order.getOrderUser());
+                                    Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Message).saveMessage(message2);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        } else {
+            ShowDialog(Default_Val.NotValidateMessage.toString());
+            String newmsg;//input
+            messegeToDocUsers(newmsg, document, type);
+            return;
+        }
 
     }
 
@@ -53,7 +83,7 @@ public class SendMassageManager {
                 sendMassageFromAdmin(massage, admin, targets, messageType);
                 break;
             case SpecialUsers:
-                List<User> targets = FilterUser();
+                List<User> targets = filterUser();
                 if (targets.size() < 1) {
                     ShowDialog(Default_Val.NotUserFind.toString());
                     return;
