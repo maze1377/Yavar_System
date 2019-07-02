@@ -28,5 +28,5 @@ public class Search {
         List<Document> documents = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Document).findDocument(atr);
         return documents;
     }
-    
+
 }
