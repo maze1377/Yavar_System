@@ -25,6 +25,7 @@ public class User implements Blockable {
     private String university;
     private String certificate;
     private ArrayList<Device> userDevices;
+    private ArrayList<SpecialDocument> specialFeatures;
     private Date enterDate;
     private String creditCardNumber;
     private SupportMsg headMsg;
@@ -33,6 +34,26 @@ public class User implements Blockable {
     private int userBlock;
     private int docBlock;
     private int connectionLimitBlock;
+
+    public ArrayList<SpecialDocument> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void addSpecialFeature(SpecialDocument specialDocument){
+        specialFeatures.add(specialDocument);
+    }
+
+    public boolean removeSpecialFeature(SpecialDocument specialDocument) {
+        for(int w=0 ; w<specialFeatures.size();w++){
+            if(specialFeatures.get(w).getDocument().equals(specialDocument.getDocument())){
+                specialFeatures.remove(w);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 
     public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, SupportMsg headMsg, long credit) {
         this.orderList = orderList;
@@ -299,4 +320,6 @@ public class User implements Blockable {
         if (this.negScoreExceeds(type) == -1) return false;
         return true;
     }
+
+
 }
