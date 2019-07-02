@@ -38,6 +38,14 @@ public class Db_Handler {
         return true;
     }
 
+    public boolean saveLastVertionOfDoc(Document document) throws Db_Write_Ex {
+        return true;
+    }
+
+    public List<Document> findLastVertionOfDoc(Document document) throws Db_Write_Ex {
+        return null;
+    }
+
     public boolean deleteDocument(Document document) {
         return true;
     }

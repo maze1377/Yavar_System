@@ -47,11 +47,11 @@ public class Comment implements Blockable {
 
     @Override
     public int negScoreExceeds(BlockType type) throws BlockTypeException {
-        if (type == BlockType.Comment) {
-            return 0;
-        } else {
-            throw new BlockTypeException(type);
-        }
+        if (type == BlockType.Comment)
+            return this.user.negScoreExceeds(BlockType.Comment);
+        else
+            throw new BlockTypeException(BlockType.Comment);
+
     }
 
     @Override
