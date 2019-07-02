@@ -73,7 +73,6 @@ public class Document implements Code<Document> {
         for (String xxx : codes) {
             concats += xxx;
         }
-        Document document = DocumentBuilder.decodeObject(concats);
         Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Document).updateDocument(this);
     }
 

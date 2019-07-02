@@ -12,7 +12,7 @@ public class Setting {
         return null;
     }
 
-    public static Admin SYSTEM = new Admin();//todo
+    public static Admin SYSTEM;//todo
     public static stateLan curentState = stateLan.Fa;
 
     public static long minCredit = 10000;

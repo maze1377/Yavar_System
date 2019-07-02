@@ -20,6 +20,7 @@ public enum Default_Val {
     SuggestionSuccessful("ممنون از ارسال نظرات.", "Thank you for your suggestion"),
     SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
     DocUpdate("سند شما اپدیت شد.", "Your Document Update"),
+    EditedDoc("سند شما اپدیت شد.", "Your Document Update"),
 
 
     morereports("تعداد گزارشات بیش از حد.", "you cant remove this device"),
