@@ -2,10 +2,8 @@ package DB;
 
 import Model.*;
 import Model.Report.ReportMessage;
-import Model.Report.Support;
 import setting.Setting;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,9 +136,16 @@ public class Db_Handler {
     public boolean saveReportMessage(ReportMessage reportMessage) throws Db_Write_Ex {
         return true;
     }
-    public boolean saveReportMessage(ArrayList<Support> reportMessage) throws Db_Write_Ex {
-        return true;
+
+    public List<Document> findReport(String... arr) throws Db_NotFind_Ex {
+        return null;
     }
+
+    public Document findReport(Integer reportId) throws Db_NotFind_Ex {
+        return null;
+    }
+
+
 
     //search for
     public List<Object> search(String q, Setting.Db_Table_name table_name, boolean withSnippets) {

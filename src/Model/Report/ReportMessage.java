@@ -1,5 +1,7 @@
 package Model.Report;
 
+import Model.User;
+
 import java.util.Date;
 
 public abstract class ReportMessage {
@@ -8,9 +10,9 @@ public abstract class ReportMessage {
     private final Date sendDate;
     private final String msg;
     private final int idMessage;
-    private final int sender;
+    private final User sender;
 
-    public ReportMessage(ReportType type, String msg, int idMessage, int sender) {
+    public ReportMessage(ReportType type, String msg, int idMessage, User sender) {
         this.type = type;
         this.msg = msg;
         this.idMessage = idMessage;
@@ -18,8 +20,7 @@ public abstract class ReportMessage {
         this.sendDate = new Date();
     }
 
-    public ReportMessage(ReportType type, Date sendDate, String msg, int idMessage, int sender) {
-
+    public ReportMessage(ReportType type, Date sendDate, String msg, int idMessage, User sender) {
         this.type = type;
         this.sendDate = sendDate;
         this.msg = msg;
