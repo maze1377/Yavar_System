@@ -5,6 +5,7 @@ import Tools.Code;
 import Tools.Decode;
 import setting.Setting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Document implements Code<Document> {
@@ -26,6 +27,7 @@ public class Document implements Code<Document> {
     private Level level;
     private WrapperFile files;
     private Doc_State stateDoc;
+    private ArrayList<Score> scores;
 
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
@@ -41,6 +43,7 @@ public class Document implements Code<Document> {
         this.details = details;
         this.publishDate = publishDate;
         this.idDocument = Setting.genarateIdDoc();
+        scores = new ArrayList();
     }
 
     @Override
@@ -98,6 +101,48 @@ public class Document implements Code<Document> {
 
     public String getDefects() {
         return defects;
+    }
+
+    public ArrayList<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(ArrayList<Score> scores) {
+        this.scores = scores;
+    }
+
+    public void addScore(Score score) {
+       scores.add(score);
+    }
+
+    public boolean removeScore(Score score) {
+       for(int w = 0 ; w< scores.size();w++){
+           if(score.user.getUserName() .equals(scores.get(w).user.getUserName())){
+               scores.remove(w);
+               return true;
+           }
+       }
+       return false;
+    }
+
+    public int getAverageScore() {
+        int sum = 0;
+        for(int w = 0 ; w< scores.size();w++){
+         w+= scores.get(w ).getScoreNum();
+            }
+        return  sum/scores.size();
+        }
+
+
+    public boolean updateScore(Score score) {
+        for(int w = 0 ; w< scores.size();w++){
+            if(score.user.getUserName() .equals(scores.get(w).user.getUserName())){
+                scores.remove(w);
+                scores.add(score);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Field getField() {
