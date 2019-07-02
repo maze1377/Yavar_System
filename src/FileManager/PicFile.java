@@ -7,12 +7,12 @@ public class PicFile implements Component_File {
     private static final String TypeOfFile="pdf";
 
     @Override
-    public File code(File file) {
-        return null;
+    public void code(File file) {
+
     }
 
     @Override
-    public File decode(File file) {
-        return null;
+    public void decode(File file) {
+
     }
 }

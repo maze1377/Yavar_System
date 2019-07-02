@@ -64,7 +64,7 @@ public class Setting {
         Support("Support"),
         UserReport("UserReport"),
         DocReport("DocReport"),
-
+        templateOfDocs("templateOfDocs"),
         ;
         private String Table_name;
 

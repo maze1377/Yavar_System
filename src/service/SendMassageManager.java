@@ -7,6 +7,7 @@ import setting.Setting;
 
 import java.util.List;
 
+import static service.Search.filterUser;
 import static setting.Setting.genarateIdMessage;
 
 public class SendMassageManager {
@@ -33,10 +34,8 @@ public class SendMassageManager {
     }
 
     //
-    public void messegeToDocUsers(String msg, Document document, MessageType type) {
+    public static void messegeToDocUsers(String msg, Document document, MessageType type) {
         if (ValidateMessage(msg)) {
-
-
             switch (type) {
                 case Admin:
                     Message message = new Message(msg, genarateIdMessage(), Setting.SYSTEM, document.getPublisher());
@@ -93,7 +92,7 @@ public class SendMassageManager {
         }
     }
 
-    public void ShowDialog(String msg) {
+    public static void ShowDialog(String msg) {
 
     }
 

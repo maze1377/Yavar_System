@@ -1,5 +1,6 @@
 package Model;
 
+import DB.Db_Handler;
 import FileManager.WrapperFile;
 import Tools.Code;
 import Tools.Decode;
@@ -30,6 +31,10 @@ public class Document implements Code<Document> {
     private ArrayList<Score> scores;
     private ArrayList<Comment> comments;
 
+    public static boolean Validator(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
+        return true;
+    }
+
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
         this(publisher, name, freeDom, hashtagList, cost, details, new Date());
     }
@@ -54,6 +59,30 @@ public class Document implements Code<Document> {
 
     }
 
+    public static boolean Validator(List<String> codes) {
+        return true;
+    }
+
+    protected Document clone() {
+        return this;
+    }
+
+    public void Update(List<String> codes) {
+        Db_Handler.getDatabaseHandler(Setting.Db_Table_name.templateOfDocs).saveLastVertionOfDoc(this);
+        String concats = "";
+        for (String xxx : codes) {
+            concats += xxx;
+        }
+        Document document = DocumentBuilder.decodeObject(concats);
+        Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Document).updateDocument(this);
+    }
+
+    public Document ChangeForPrew(List<String> Userinput, WrapperFile files) {
+        Document temp = this.clone();
+        temp.files.addFiles(files);
+        //
+        return temp;
+    }
 
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details, Date publishDate) {
