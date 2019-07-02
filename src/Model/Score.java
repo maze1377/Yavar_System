@@ -4,11 +4,21 @@ public class Score {
 
     int scoreNum;
     User user;
+    Date dateOfScore;
 
-    public Score(int scoreNum, User user) {
+
+    public Score(int scoreNum, User user, Date dateOfScore) {
         this.scoreNum = scoreNum;
         this.user = user;
-        Date dateOfScore;
+        this.dateOfScore = dateOfScore;
+    }
+
+    public Date getDateOfScore() {
+        return dateOfScore;
+    }
+
+    public void setDateOfScore(Date dateOfScore) {
+        this.dateOfScore = dateOfScore;
     }
 
     public int getScoreNum() {
