@@ -2,6 +2,7 @@ package Model;
 
 import Management.AccountManagement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -18,9 +19,31 @@ public class User {
     private String field;
     private String university;
     private String certificate;
+    private ArrayList<Device> userDevices;
     private Date enterDate;
     private String creditCardNumber;
     private long credit;
+
+    public ArrayList<Device> getUserDevices() {
+        return userDevices;
+    }
+    public void addUserDevices(Device device) {
+        userDevices.add(device);
+    }
+    public boolean removeUserDevices(Device device) {
+        for(int w = 0 ; w< userDevices.size(); w++){
+            if(device.getMac_ip() ==userDevices.get(w).getMac_ip()){
+              userDevices.remove(w);
+            return true;
+            }
+        }
+        return false;
+
+    }
+
+    public void setUserDevices(ArrayList<Device> userDevices) {
+        this.userDevices = userDevices;
+    }
 
     public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, long credit) {
         this.orderList = orderList;
@@ -38,6 +61,7 @@ public class User {
         this.enterDate = enterDate;
         this.creditCardNumber = creditCardNumber;
         this.credit = credit;
+        userDevices = new ArrayList<>();
     }
 
     public void requestAddCredit(long amount){
