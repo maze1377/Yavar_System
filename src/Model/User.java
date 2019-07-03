@@ -8,7 +8,6 @@ import Model.Block.Blockable;
 import Model.Report.SupportMsg;
 import service.PublicFunctions;
 import service.Search;
-import service.SendMassageManager;
 import setting.Setting;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class User implements Blockable {
     private Date enterDate;
     private String creditCardNumber;
     private SupportMsg headMsg;
-    private long credit;
+    private double credit;
     private BlockModel commentBlock;
     private BlockModel userBlock;
     private BlockModel docBlock;
@@ -125,7 +124,7 @@ public class User implements Blockable {
         List<Document> resultDocument = null;
         Search search = new Search();
         while(!cancelSearch) {
-            List<Document> documents = search.searchDocument(input);
+            List<Document> documents = Search.searchDocument(input);
             List<Document> documents1 = search.filterDocument(field, certificate, university, course, price, enterDate);
             resultDocument = PublicFunctions.intersection(documents, documents1);
             boolean searchAgain = true;
@@ -142,7 +141,7 @@ public class User implements Blockable {
         AccountManagement.addAccount(this, amount);
     }
 
-    public void addCredit(long amount) {
+    public void addCredit(double amount) {
         credit += amount;
     }
 
@@ -150,7 +149,7 @@ public class User implements Blockable {
         AccountManagement.withdraw(this, amount);
     }
 
-    public void withdraw(long amount) {
+    public void withdraw(double amount) {
         credit -= amount;
     }
 
@@ -279,7 +278,7 @@ public class User implements Blockable {
         this.creditCardNumber = creditCardNumber;
     }
 
-    public long getCredit() {
+    public double getCredit() {
         return credit;
     }
 
@@ -362,10 +361,7 @@ public class User implements Blockable {
             default:
                 throw new BlockTypeException(type);
         }
-        if (this.negScoreExceeds(type) == -1) {
-            return true;
-        }
-        return false;
+        return this.negScoreExceeds(type) == -1;
     }
 
     @Override

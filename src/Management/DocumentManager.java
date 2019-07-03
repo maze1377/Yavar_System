@@ -10,7 +10,7 @@ import setting.Setting;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Management.BalanceManager.UpdateUserBalance;
+import static Management.AccountManagement.addAccount;
 import static config.Default_Val.CantEditDoc;
 import static service.SendMassageManager.ShowDialog;
 import static service.SendMassageManager.sendMassageFromAdmin;
@@ -86,15 +86,17 @@ public class DocumentManager {
     }
 
     public static void DeleteDocumentAdmin(Admin admin, Document document) {
-        if (document == null)
+        if (document == null) {
+            ShowDialog(Default_Val.NotFindDocument.toString());
             return;
+        }
         List<User> targets = Db_Handler.getDatabaseHandler(Setting.Db_Table_name.User).findUser("*");
         for (User user : targets) {
             for (Order order : user.getOrderList()) {
                 if (order.isSuccessFull()) {
                     if (order.getDocument().equals(document)) {
                         double cost = callDamageOfRemove(user, document);
-                        UpdateUserBalance(user, cost);
+                        addAccount(user, cost);
                         List<User> users = new ArrayList<>();
                         users.add(user);
                         sendMassageFromAdmin(Default_Val.fullDelet.toString(), admin, users, MessageType.Warning);
@@ -103,11 +105,26 @@ public class DocumentManager {
                 }
             }
         }
-
     }
 
     private static Double callDamageOfRemove(User user, Document document) {
         return null;
     }
 
+    public static void DeleteDocumentUser(User user, Document document) {
+        Date nowDate = new Date();
+        if (document == null) {
+            ShowDialog(Default_Val.NotFindDocument.toString());
+            return;
+        }
+    }
+
+    public static Document CreatDocument(User user) {
+        return null;
+    }
+
+    public static boolean BuyDocument(User user, Document document) {
+        return true;
+
+    }
 }

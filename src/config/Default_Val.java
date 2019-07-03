@@ -7,6 +7,8 @@ public enum Default_Val {
 
     CommentSuccessful("نظر شما با موفقیت ارسال شد.", "Comment has been sent successfully"),
     CommentNotSuccessful("نظر شما ارسال نشد.", "Comment has not been sent successfully"),
+    NotFindDocument("سند مورد نظر یافت نشد.", "Document not Find"),
+    CantDeletethisDocument("شما نمیتوانید این سند را حذف کنید", "you cant remove this document"),
 
     ReportUserSuccessful("گزارش شما با موفقیت ارسال شد.", "Your report has been sent successfully"),
     ReportUserNotSuccessful("گزارش شما ارسال نشد.", "Your report has not been sent successfully"),

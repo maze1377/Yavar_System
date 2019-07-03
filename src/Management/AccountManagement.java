@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AccountManagement {
 
-    public static boolean withdraw(User user, long amount){
+    public static boolean withdraw(User user, double amount) {
         if(user.hasCreditCard()){
             if(user.getCredit() > amount + Setting.minCredit) {
                 if(bankPortWithdraw(amount)) {
@@ -51,7 +51,7 @@ public class AccountManagement {
         return false;
     }
 
-    public static boolean addAccount(User user, long amount){
+    public static boolean addAccount(User user, double amount) {
         boolean statusPay = bankPortDeposit(amount);
         if(statusPay == true){
             user.addCredit(amount);
@@ -63,13 +63,13 @@ public class AccountManagement {
         return true;
     }
 
-    public static boolean bankPortDeposit(long amount){
+    public static boolean bankPortDeposit(double amount) {
         // Todo Bank Port
         boolean statusPay = true;
         return statusPay;
     }
 
-    public static boolean bankPortWithdraw(long amount){
+    public static boolean bankPortWithdraw(double amount) {
         // Todo Bank Port
         boolean statusPay = true;
         return statusPay;
