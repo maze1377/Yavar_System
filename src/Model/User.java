@@ -23,6 +23,7 @@ public class User {
     private String certificate;
     private Date enterDate;
     private String creditCardNumber;
+    private SupportMsg headMsg;
     private long credit;
 
     public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, long credit) {
@@ -43,55 +44,86 @@ public class User {
         this.credit = credit;
     }
 
-    public List<User> requestSearchAndFilterUser(String input, String... atr){
-        List<User> users = Search.searchUser(input);
-        List<User> users1 = Search.filterUser(atr);
-        List<User> resultUser = PublicFunctions.intersection(users, users1);
+    public List<User> requestSearchAndFilterUser(String input, String field, String certificate, String university, String enterData, String enterYear) {
+        boolean cancelSearch = false;
+        List<User> resultUser = null;
+        Search search = new Search();
+        while(!cancelSearch) {
+            List<User> users = search.searchUser(input);
+            List<User> users1 = search.filterUser(field, certificate, university, enterData, enterYear);
+            resultUser = PublicFunctions.intersection(users, users1);
+            boolean searchAgain = true;
+            while(searchAgain){
+                List<User> users2 = search.searchUser(resultUser, input);
+                List<User> users3 = search.filterUser(resultUser, field, certificate, university, enterData, enterYear);
+                resultUser = PublicFunctions.intersection(users2, users3);
+            }
+        }
         return resultUser;
     }
 
-    public List<Document> requestSearchAndFilterDocument(String input, String... atr){
-        List<Document> Documents = Search.searchDocument(input);
-        List<Document> Documents1 = Search.filterDocument(atr);
-        List<Document> resultDocument = PublicFunctions.intersection(Documents, Documents1);
+    public List<Document> requestSearchAndFilterDocument(String input,String field, String certificate, String university, String course, long price, java.util.Date enterDate) {
+        boolean cancelSearch = false;
+        List<Document> resultDocument = null;
+        Search search = new Search();
+        while(!cancelSearch) {
+            List<Document> documents = search.searchDocument(input);
+            List<Document> documents1 = search.filterDocument(field, certificate, university, course, price, enterDate);
+            resultDocument = PublicFunctions.intersection(documents, documents1);
+            boolean searchAgain = true;
+            while (searchAgain) {
+                List<Document> documents2 = search.searchDocument(resultDocument, input);
+                List<Document> documents3 = search.filterDocuments(resultDocument, field, certificate, university, course, price, enterDate);
+                resultDocument = PublicFunctions.intersection(documents2, documents3);
+            }
+        }
         return resultDocument;
     }
 
-    public void requestAddCredit(long amount){
+    public void requestAddCredit(long amount) {
         AccountManagement.addAccount(this, amount);
     }
 
-    public void addCredit(long amount){
+    public void addCredit(long amount) {
         credit += amount;
     }
 
-    public void requestWithdraw(long amount){
+    public void requestWithdraw(long amount) {
         AccountManagement.withdraw(this, amount);
     }
 
-    public void withdraw(long amount){
+    public void withdraw(long amount) {
         credit -= amount;
     }
 
-    public void clone(User user){
+    public void clone(User user) {
 
     }
 
-    public boolean hasCreditCard(){ return !creditCardNumber.isEmpty();
+    public boolean hasCreditCard() {
+        return !creditCardNumber.isEmpty();
     }
 
-    public boolean equals(User user){
+    public boolean equals(User user) {
         boolean isEquals = false;
         return isEquals;
     }
 
-    public List<Order> getOrderList() { return orderList; }
+    public List<Order> getOrderList() {
+        return orderList;
+    }
 
-    public void setOrderList(List<Order> orderList) { this.orderList = orderList; }
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
 
-    public List<Document> getMyDocuments() { return myDocuments; }
+    public List<Document> getMyDocuments() {
+        return myDocuments;
+    }
 
-    public void setMyDocuments(List<Document> myDocuments) { this.myDocuments = myDocuments; }
+    public void setMyDocuments(List<Document> myDocuments) {
+        this.myDocuments = myDocuments;
+    }
 
     public String getUserName() {
         return userName;
@@ -197,7 +229,11 @@ public class User {
         this.credit = credit;
     }
 
-    public SupportMsg getHeadMsg() {return headMsg;}
+    public SupportMsg getHeadMsg() {
+        return headMsg;
+    }
 
-    public void setHeadMsg(SupportMsg headMsg) { this.headMsg = headMsg; }
+    public void setHeadMsg(SupportMsg headMsg) {
+        this.headMsg = headMsg;
+    }
 }

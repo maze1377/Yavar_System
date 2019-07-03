@@ -14,9 +14,18 @@ public class AccountManagement {
     public static boolean withdraw(User user, long amount){
         if(user.hasCreditCard()){
             if(user.getCredit() > amount + Setting.minCredit) {
-                if(bankPortWithdraw(amount))
+                if(bankPortWithdraw(amount)) {
                     user.withdraw(amount);
-                return true;
+                    return true;
+                }
+                else{
+                    showError("payment error");
+                    return false;
+                }
+            }
+            else{
+                showError("not enough credit");
+                return false;
             }
         }
         else{
