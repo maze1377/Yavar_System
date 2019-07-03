@@ -4,6 +4,7 @@ import DB.Db_Handler;
 import Model.Date;
 import Model.Document;
 import Model.Order;
+import Model.Report.SupportMsg;
 import Model.User;
 import setting.Setting;
 
@@ -43,8 +44,9 @@ public class AccountManagement {
             String certificate = null;
             Date enterDate = null;
             String creditCardNumber = null;
+            SupportMsg headMessage = null;
             long credit = 0;
-            ProfileManagement.editProfile(user, new User(orderList, myDocuments, userName, password, firstName, lastName, nationalCode, tel, email, field, university, certificate, enterDate, creditCardNumber, credit));
+            ProfileManagement.editProfile(user, new User(orderList, myDocuments, userName, password, firstName, lastName, nationalCode, tel, email, field, university, certificate, enterDate, creditCardNumber, headMessage, credit));
         }
         return false;
     }
