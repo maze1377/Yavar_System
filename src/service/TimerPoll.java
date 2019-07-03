@@ -16,9 +16,4 @@ public class TimerPoll {
     public void addRunnable(Date timeStart, Runnable runnable) {
 
     }
-
-    public void removeRunnable(Runnable runnable) {
-
-    }
-
 }

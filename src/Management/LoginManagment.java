@@ -15,7 +15,8 @@ public class LoginManagment {
         if (users.size() == 0) {
             showerror("cant find user name");
             Device device = new Device(logindate , mac_ip);
-            device.block(BlockType.Device);
+            BlockManagement.block(device, BlockType.Device, null);
+
             return null;
         } else {
             if (users.get(0).getPassword().equals(password)) {

@@ -15,13 +15,13 @@ public class SpecialFeaturesManagment {
     public boolean addSpecialFeature(SpecialDocument specialDocument , User user){
             if(showRoles()){
                 if( user.getCredit()-specialDocument.getCost()>0){
-                    user.setCredit(user.getCredit()-specialDocument.getCost());
+                    user.setCredit((long)user.getCredit()-specialDocument.getCost());
                     user.addSpecialFeature(specialDocument);
                     return true;
                 }else{
                     showerror("not enough cost");
                    if( AccountManagement.withdraw(user,specialDocument.getCost()-user.getCredit())){
-                       user.setCredit(user.getCredit()-specialDocument.getCost());
+                       user.setCredit((long)user.getCredit()-specialDocument.getCost());
                        user.addSpecialFeature(specialDocument);
                        return true;
                    }else{
@@ -46,7 +46,7 @@ public class SpecialFeaturesManagment {
                 SpecialDocument removed = user.getSpecialFeatures().get(w);
                 int returncost = returncost(removed.getStartDate(),removed.getMounth(),removed.getCost());
              if (  showreturnedcost(returncost)){
-                 user.setCredit(user.getCredit()+returncost);
+                 user.setCredit((long)user.getCredit()+returncost);
                  user.removeSpecialFeature(user.getSpecialFeatures().get(w));
                  return true;
              }else{
