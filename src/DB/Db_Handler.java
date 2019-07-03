@@ -158,6 +158,10 @@ public class Db_Handler {
         return null;
     }
 
+    public void saveReportedComment(ReportComment reportComment){
+
+    }
+
 
 
     //search for

@@ -5,6 +5,7 @@ public enum BlockType {
     User("User"),
     ConnectionLimit("ConnectionLimit"),
     Comment("Comment"),
+    Device("Device"),
     ;
     private String type;
     BlockType(String str){

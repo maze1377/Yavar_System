@@ -18,13 +18,22 @@ public class SpecialFeaturesManagment {
                     user.setCredit(user.getCredit()-specialDocument.getCost());
                     user.addSpecialFeature(specialDocument);
                     return true;
-
                 }else{
-                    showerror("عدم موجودی کافی");
-                    return false;
+                    showerror("not enough cost");
+                   if( AccountManagement.withdraw(user,specialDocument.getCost()-user.getCredit())){
+                       user.setCredit(user.getCredit()-specialDocument.getCost());
+                       user.addSpecialFeature(specialDocument);
+                       return true;
+                   }else{
+                       showerror("not enough cost");
+                       return false;
+
+                   }
+
+
                 }
             }else{
-                showerror("عدم تایید قوانین");
+                showerror("dont accept roles");
                 return false;
             }
 
@@ -41,7 +50,7 @@ public class SpecialFeaturesManagment {
                  user.removeSpecialFeature(user.getSpecialFeatures().get(w));
                  return true;
              }else{
-                 showerror("حذف امکانات ویژه انجام نشد");
+                 showerror("special dont do");
                  return false;
              }
             }

@@ -65,6 +65,7 @@ public class Setting {
         UserReport("UserReport"),
         DocReport("DocReport"),
         templateOfDocs("templateOfDocs"),
+        ReportedComments("ReportedComments"),
         ;
         private String Table_name;
 

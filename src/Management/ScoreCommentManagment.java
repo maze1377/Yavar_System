@@ -1,7 +1,10 @@
 package Management;
 
+import DB.Db_Handler;
 import Model.*;
+import Model.Block.BlockType;
 import config.Default_Val;
+import setting.Setting;
 
 public class ScoreCommentManagment {
 
@@ -29,7 +32,7 @@ public class ScoreCommentManagment {
 
 
     public void add_comment(Comment comment , Document document){
-        if(true){ //// masdod nabodan
+        if(comment.getUser().negScoreExceeds(BlockType.Comment) != -1){ //// masdod nabodan
             if(comment.getBody().equals("")){
                 showError(Default_Val.freecomment.toString());
             }else{
@@ -41,6 +44,8 @@ public class ScoreCommentManagment {
                     //todo farakhani masdod kardan
                 }
             }
+        }else{
+            showError("you cant comment becuase you are block");
         }
     }
 
@@ -53,8 +58,8 @@ public class ScoreCommentManagment {
         if(reportComment.getDes().equals("")){
             return false;
         }
-        if(true){
-            ///////
+        if(reportComment.getUser().negScoreExceeds(BlockType.User) != -1){
+            Db_Handler.getDatabaseHandler(Setting.Db_Table_name.ReportedComments).saveReportedComment(reportComment);
             return true;
         }else{
             showError(Default_Val.morereports.toString());
