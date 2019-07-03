@@ -1,7 +1,8 @@
 package DB;
 
 import Model.*;
-import Model.Report.ReportMessage;
+import Model.Report.AnswerableSingleMsg;
+import Model.Report.ReportSingleMsg;
 import setting.Setting;
 
 import java.util.HashMap;
@@ -36,6 +37,14 @@ public class Db_Handler {
 
     public boolean updateDocument(Document document) throws Db_Write_Ex {
         return true;
+    }
+
+    public boolean saveLastVertionOfDoc(Document document) throws Db_Write_Ex {
+        return true;
+    }
+
+    public List<Document> findLastVertionOfDoc(Document document) throws Db_Write_Ex {
+        return null;
     }
 
     public boolean deleteDocument(Document document) {
@@ -133,7 +142,11 @@ public class Db_Handler {
     }
 
     //report
-    public boolean saveReportMessage(ReportMessage reportMessage) throws Db_Write_Ex {
+    public boolean saveReportMessage(ReportSingleMsg reportMessage) throws Db_Write_Ex {
+        return true;
+    }
+
+    public boolean updateReport(AnswerableSingleMsg msg) throws Db_Write_Ex {
         return true;
     }
 

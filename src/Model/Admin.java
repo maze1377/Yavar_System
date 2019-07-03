@@ -2,13 +2,35 @@ package Model;
 
 import service.PublicFunctions;
 import service.Search;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Admin {//todo baiad az User extend kone ia na? age bokone id ke to User hast to in iek chiz dige ast!
     //bahse in ke admin kar haie User nemitone bokone!
 
-    //private final Integer idAdmin;
+    private final Integer IdAdmin;
+    private String userName;
+    private String password;
+    private String firstName;
+    private String LastName;
+    private String tel;
+    private String email;
+    private ArrayList<Device> userDevices;
+    private Date enterDate;
+    private String creditCardNumber;
+
+    public Admin(Integer idAdmin, String userName, String password, String firstName, String lastName, String tel, String email, ArrayList<Device> userDevices, Date enterDate, String creditCardNumber) {
+        IdAdmin = idAdmin;
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        LastName = lastName;
+        this.tel = tel;
+        this.email = email;
+        this.userDevices = userDevices;
+        this.enterDate = enterDate;
+        this.creditCardNumber = creditCardNumber;
+    }
 
     public List<User> requestSearchAndFilterUser(String input, String field, String certificate, String university, String enterData, String enterYear) {
         boolean cancelSearch = false;

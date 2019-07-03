@@ -2,7 +2,7 @@ package Model.Report;
 
 import Model.User;
 
-public class ReportDoc extends ReportMessage {
+public class ReportDoc extends ReportSingleMsg implements AnswerableSingleMsg {
     private final int reportedDocID;
 
     public ReportDoc(String msg, int idMessage, User sender, int reportedDocID) {
@@ -12,5 +12,10 @@ public class ReportDoc extends ReportMessage {
 
     public int getReportedDocID() {
         return reportedDocID;
+    }
+
+    @Override
+    public void answer(String msg) {
+
     }
 }

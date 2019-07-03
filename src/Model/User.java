@@ -1,13 +1,20 @@
 package Model;
 
 import Management.AccountManagement;
+import Model.Block.BlockModel;
+import Model.Block.BlockType;
+import Model.Block.BlockTypeException;
+import Model.Block.Blockable;
 import Model.Report.SupportMsg;
 import service.PublicFunctions;
 import service.Search;
+import service.SendMassageManager;
+import setting.Setting;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Blockable {
     //private final Integer idUser;
     private List<Order> orderList;
     private List<Document> myDocuments;
@@ -21,12 +28,38 @@ public class User {
     private String field;
     private String university;
     private String certificate;
+    private ArrayList<Device> userDevices;
+    private ArrayList<SpecialDocument> specialFeatures;
     private Date enterDate;
     private String creditCardNumber;
     private SupportMsg headMsg;
     private long credit;
+    private BlockModel commentBlock;
+    private BlockModel userBlock;
+    private BlockModel docBlock;
+    private BlockModel connectionLimitBlock;
 
-    public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, long credit) {
+    public ArrayList<SpecialDocument> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void addSpecialFeature(SpecialDocument specialDocument){
+        specialFeatures.add(specialDocument);
+    }
+
+    public boolean removeSpecialFeature(SpecialDocument specialDocument) {
+        for(int w=0 ; w<specialFeatures.size();w++){
+            if(specialFeatures.get(w).getDocument().equals(specialDocument.getDocument())){
+                specialFeatures.remove(w);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
+    public User(List<Order> orderList, List<Document> myDocuments, String userName, String password, String firstName, String lastName, String nationalCode, String tel, String email, String field, String university, String certificate, Date enterDate, String creditCardNumber, SupportMsg headMsg, long credit) {
         this.orderList = orderList;
         this.myDocuments = myDocuments;
         this.userName = userName;
@@ -42,8 +75,33 @@ public class User {
         this.enterDate = enterDate;
         this.creditCardNumber = creditCardNumber;
         this.credit = credit;
+        userDevices = new ArrayList<>();
     }
 
+
+    public ArrayList<Device> getUserDevices() {
+        return userDevices;
+    }
+
+
+    public void addUserDevices(Device device) {
+        userDevices.add(device);
+    }
+
+    public boolean removeUserDevices(Device device) {
+        for (int w = 0; w < userDevices.size(); w++) {
+            if (device.getMac_ip() == userDevices.get(w).getMac_ip()) {
+                userDevices.remove(w);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public void setUserDevices(ArrayList<Device> userDevices) {
+        this.userDevices = userDevices;
+    }
     public List<User> requestSearchAndFilterUser(String input, String field, String certificate, String university, String enterData, String enterYear) {
         boolean cancelSearch = false;
         List<User> resultUser = null;
@@ -233,7 +291,86 @@ public class User {
         return headMsg;
     }
 
-    public void setHeadMsg(SupportMsg headMsg) {
-        this.headMsg = headMsg;
+    public BlockModel getCommentBlock() {
+        return commentBlock;
     }
+
+    public void setCommentBlock(BlockModel commentBlock) {
+        this.commentBlock = commentBlock;
+    }
+
+    public BlockModel getUserBlock() {
+        return userBlock;
+    }
+
+    public void setUserBlock(BlockModel userBlock) {
+        this.userBlock = userBlock;
+    }
+
+    public BlockModel getDocBlock() {
+        return docBlock;
+    }
+
+    public void setDocBlock(BlockModel docBlock) {
+        this.docBlock = docBlock;
+    }
+
+    public BlockModel getConnectionLimitBlock() {
+        return connectionLimitBlock;
+    }
+
+    public void setConnectionLimitBlock(BlockModel connectionLimitBlock) {
+        this.connectionLimitBlock = connectionLimitBlock;
+    }
+
+    @Override
+    public int negScoreExceeds(BlockType type) throws BlockTypeException {
+        switch (type) {
+            case Comment:
+                if (this.commentBlock.getNegativePoint() >= Setting.BlockMinimumDefault.Comment.getVal()) return -1;
+                else return this.commentBlock.getNegativePoint();
+            case ConnectionLimit:
+                if (this.connectionLimitBlock.getNegativePoint() >= Setting.BlockMinimumDefault.ConnectionLimit.getVal())
+                    return -1;
+                else return this.connectionLimitBlock.getNegativePoint();
+            case Document:
+                if (this.docBlock.getNegativePoint() >= Setting.BlockMinimumDefault.Document.getVal()) return -1;
+                else return this.docBlock.getNegativePoint();
+            case User:
+                if (this.userBlock.getNegativePoint() >= Setting.BlockMinimumDefault.User.getVal()) return -1;
+                else return this.userBlock.getNegativePoint();
+            default:
+                throw new BlockTypeException(type);
+        }
+    }
+
+    @Override
+    public boolean block(BlockType type) throws BlockTypeException {
+        switch (type) {
+            case User:
+                this.userBlock.increment();
+                break;
+            case Comment:
+                this.commentBlock.increment();
+                break;
+            case Document:
+                this.docBlock.increment();
+                break;
+            case ConnectionLimit:
+                this.connectionLimitBlock.increment();
+                break;
+            default:
+                throw new BlockTypeException(type);
+        }
+        if (this.negScoreExceeds(type) == -1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void checkDeadline() {
+    }
+
+
 }

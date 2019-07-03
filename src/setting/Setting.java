@@ -12,7 +12,7 @@ public class Setting {
         return null;
     }
 
-    public static Admin SYSTEM = new Admin();//todo
+    public static Admin SYSTEM;//todo
     public static stateLan curentState = stateLan.Fa;
 
     public static long minCredit = 10000;
@@ -31,6 +31,25 @@ public class Setting {
         En,
         Fa
     }
+
+    public enum BlockMinimumDefault{
+        ConnectionLimit(10),
+        Document(10),
+        User(10),
+        Comment(10),
+
+        ;
+
+        private int val;
+        BlockMinimumDefault(int val){
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
+
     public enum Db_Table_name {
         User("Users"),
         Document("Documents"),
@@ -45,7 +64,7 @@ public class Setting {
         Support("Support"),
         UserReport("UserReport"),
         DocReport("DocReport"),
-
+        templateOfDocs("templateOfDocs"),
         ;
         private String Table_name;
 

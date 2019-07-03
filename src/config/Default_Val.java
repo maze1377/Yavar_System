@@ -11,6 +11,7 @@ public enum Default_Val {
     ReportUserSuccessful("گزارش شما با موفقیت ارسال شد.", "Your report has been sent successfully"),
     ReportUserNotSuccessful("گزارش شما ارسال نشد.", "Your report has not been sent successfully"),
     NotValidateMessage("پیام دارای کلمات فیلتر شده میباشد.", "Your Message have bad Words"),
+    CantEditDoc("شما مجاز به تغییر این سند نیستید.", "you cant change this doc"),
 
     ReportDocSuccessful("گزارش شما با موفقیت ارسال شد.",  "Your report has been sent successfully"),
     ReportDocNotSuccessful("گزارش شما با موفقیت ارسال نشد.",  "Your report has not been sent successfully"),
@@ -18,11 +19,18 @@ public enum Default_Val {
 
     SuggestionSuccessful("ممنون از ارسال نظرات.", "Thank you for your suggestion"),
     SuggestionNotSuccessful("متاسفانه پیام شما ارسال نشد.", "Your message could not be delivered"),
+    DocUpdate("سند شما اپدیت شد.", "Your Document Update"),
+    EditedDoc("سند شما اپدیت شد.", "Your Document Update"),
+    fullDelet("سند به طور کامل حذف  شد.", " remove document"),
 
 
-
+    morereports("تعداد گزارشات بیش از حد.", "you cant remove this device"),
+    commentaccept("نظر شما با موفقیت ثبت شد.", "your comment added succusfully"),
+    wrongbody("شما از کلمات غیر مجاز استفاده کرده اید. ", "wrong comment"),
+    freecomment("لطفا نظر خود را وارد کنید.", "add comment"),
     cantremovedevice("شما قابلیت حذف این دستگاه را ندارید.", "you cant remove this device"),
     cantaddevice("شما قابلیت افزودن این دستگاه را ندارید. تعداد دستگاه ها به حداکثر تعداد رسیده", "you cant add this device. maximum number of devices"),
+    deviceexist("دستگاه از قبل موجود میباشد", "device exists"),
     ;
     private String per;
     private String En;

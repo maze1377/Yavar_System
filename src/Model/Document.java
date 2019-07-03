@@ -1,5 +1,6 @@
 package Model;
 
+import DB.Db_Handler;
 import FileManager.WrapperFile;
 import Tools.Code;
 import Tools.Decode;
@@ -28,11 +29,68 @@ public class Document implements Code<Document> {
     private WrapperFile files;
     private Doc_State stateDoc;
     private ArrayList<Score> scores;
+    private ArrayList<Comment> comments;
 
+    public WrapperFile getFiles() {
+        return files;
+    }
+
+    public Doc_State getStateDoc() {
+        return stateDoc;
+    }
+
+    public static boolean Validator(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
+        return true;
+    }
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details) {
         this(publisher, name, freeDom, hashtagList, cost, details, new Date());
     }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+
+    }
+
+    public boolean removeComment(Comment comment) {
+      for(int w = 0 ; w<comments.size() ; w++){
+          if(comment.user.equals(comments.get(w).user)){
+              comments.remove(w);
+              return true;
+          }
+      }
+      return false;
+
+    }
+
+    public static boolean Validator(List<String> codes) {
+        return true;
+    }
+
+    protected Document clone() {
+        return this;
+    }
+
+    public void Update(List<String> codes) {
+        Db_Handler.getDatabaseHandler(Setting.Db_Table_name.templateOfDocs).saveLastVertionOfDoc(this);
+        String concats = "";
+        for (String xxx : codes) {
+            concats += xxx;
+        }
+        Db_Handler.getDatabaseHandler(Setting.Db_Table_name.Document).updateDocument(this);
+    }
+
+    public Document ChangeForPrew(List<String> Userinput, WrapperFile files) {
+        Document temp = this.clone();
+        temp.files.addFiles(files);
+        //
+        return temp;
+    }
+
 
     private Document(User publisher, String name, Type_FreeDom freeDom, List<Hashtag> hashtagList, Double cost, String details, Date publishDate) {
         this.publisher = publisher;
@@ -44,6 +102,7 @@ public class Document implements Code<Document> {
         this.publishDate = publishDate;
         this.idDocument = Setting.genarateIdDoc();
         scores = new ArrayList();
+        comments = new ArrayList<>();
     }
 
     @Override

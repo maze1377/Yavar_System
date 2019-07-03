@@ -1,22 +1,23 @@
 package Model.Report;
 
+import Model.Document;
 import Model.User;
 
-public class ReportComment extends ReportMessage {
+public class ReportComment extends ReportSingleMsg {
     private final int forumID;
-    private final int documentID;
+    private final Document doc;
 
-    public ReportComment(String msg, int idMessage, User sender, int forumID, int documentID) {
+    public ReportComment(String msg, int idMessage, User sender, int forumID, Document doc) {
         super(ReportType.Comment, msg, idMessage, sender);
         this.forumID = forumID;
-        this.documentID = documentID;
+        this.doc = doc;
     }
 
     public int getForumID() {
         return forumID;
     }
 
-    public int getDocumentID() {
-        return documentID;
+    public Document getDocumentID() {
+        return this.doc;
     }
 }
